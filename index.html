@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skycart — Electricals, Tools &amp; Home Essentials Delivered</title>
+<meta name="description" content="Shop electricals, lighting, building materials, tools and home essentials from verified sellers, with express delivery to your jobsite.">
+<meta name="theme-color" content="#0b5cd5">
+<link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<div id="app"></div>
+<template id="app-template">
+<div style="width: 100%; min-height: 100vh; display: flex; flex-direction: column; background: #f3f5f8; font-family: Inter, system-ui, sans-serif; color: #0f172a">
+
+<header style="position: sticky; top: 0; z-index: 30; background: #ffffff; border-bottom: 1px solid #e5e8ee">
+<div class="sk-wrap" style="height: 60px; display: flex; align-items: center; gap: 24px">
+<button type="button" class="sk-link" onClick="{{goHome}}" aria-label="Skycart home" style="display: flex; align-items: center; gap: 8px; flex-shrink: 0">
+<span style="width: 30px; height: 30px; display: grid; place-items: center; border-radius: 7px; background: #0b5cd5; color: #ffffff">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
+</span>
+<span style="font-size: 21px; font-weight: 700; letter-spacing: -0.025em; color: #0b5cd5">Skycart</span>
+</button>
+<button type="button" class="sk-link sk-desk" onClick="{{goSearch}}" style="flex-grow: 1; max-width: 520px; height: 42px; display: flex; align-items: center; gap: 8px; border-radius: 10px; background: #f3f5f8; padding: 0 16px; font-size: 14px; color: #64748b">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
+Search for products, brands...
+</button>
+<nav class="sk-desk" aria-label="Main" style="display: flex; align-items: center; gap: 8px; margin-left: auto">
+<button type="button" class="sk-link sk-ghost" onClick="{{goHome}}" style="height: 40px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: {{nav.home}}">Home</button>
+<button type="button" class="sk-link sk-ghost" onClick="{{goCategories}}" style="height: 40px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: {{nav.cats}}">Categories</button>
+<button type="button" class="sk-link sk-ghost" onClick="{{goOrders}}" style="height: 40px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: {{nav.orders}}">Orders</button>
+<button type="button" class="sk-link sk-ghost" onClick="{{goNotifications}}" aria-label="Notifications" style="width: 40px; height: 40px; display: grid; place-items: center; border-radius: 8px; color: {{nav.notes}}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg>
+</button>
+<button type="button" class="sk-link sk-ghost" onClick="{{goAccount}}" aria-label="Account" style="width: 40px; height: 40px; display: grid; place-items: center; border-radius: 8px; color: {{nav.account}}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+</button>
+<button type="button" class="sk-link sk-primary" onClick="{{goCart}}" style="height: 40px; display: flex; align-items: center; gap: 8px; padding: 0 14px; border-radius: 8px; background: #0b5cd5; color: #ffffff; font-size: 14px; font-weight: 600">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
+Cart
+<span style="min-width: 20px; height: 20px; display: grid; place-items: center; border-radius: 999px; background: #ffffff; color: #0b5cd5; font-size: 11px; padding: 0 6px">{{cartCount}}</span>
+</button>
+</nav>
+<div class="sk-mob" style="display: flex; align-items: center; gap: 4px; margin-left: auto">
+<button type="button" class="sk-link" onClick="{{goSearch}}" aria-label="Search" style="width: 44px; height: 44px; display: grid; place-items: center; color: #0f172a">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
+</button>
+<button type="button" class="sk-link" onClick="{{goNotifications}}" aria-label="Notifications" style="width: 44px; height: 44px; display: grid; place-items: center; color: #0f172a">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg>
+</button>
+</div>
+</div>
+</header>
+
+<main class="sk-main">
+
+<sc-if value="{{showBack}}" hint-placeholder-val="{{false}}">
+<div class="sk-wrap" style="padding-top: 20px; display: flex; align-items: center; gap: 12px">
+<button type="button" class="sk-link sk-row" onClick="{{goBack}}" aria-label="Go back" style="width: 40px; height: 40px; flex-shrink: 0; display: grid; place-items: center; border-radius: 999px; background: #ffffff; border: 1px solid #e5e8ee; color: #0f172a">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+</button>
+<h1 style="margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.01em; color: #0f172a">{{pageTitle}}</h1>
+</div>
+</sc-if>
+
+<sc-if value="{{is.home}}" hint-placeholder-val="{{true}}">
+<div class="sk-wrap">
+<div class="sk-mob" style="padding-top: 16px">
+<button type="button" class="sk-link" onClick="{{goSearch}}" style="width: 100%; height: 44px; display: flex; align-items: center; gap: 8px; border-radius: 10px; background: #ffffff; border: 1px solid #e5e8ee; padding: 0 16px; font-size: 14px; color: #64748b">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
+Search for products, brands...
+</button>
+</div>
+<section style="padding-top: 20px">
+<div class="sk-hero" style="position: relative; overflow: hidden; border-radius: 16px; background: linear-gradient(135deg, #0b5cd5 0%, #0a4cb0 50%, #0b1b3a 100%); color: #ffffff; display: flex; align-items: center; justify-content: space-between; gap: 24px">
+<div>
+<p style="margin: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.85">Monsoon sale</p>
+<p class="sk-hero-title" style="margin: 4px 0 0; font-weight: 700">Up to 60% off<br>site essentials</p>
+<button type="button" class="sk-link" onClick="{{goCategories}}" style="margin-top: 16px; display: inline-flex; height: 40px; align-items: center; border-radius: 999px; background: #ffffff; padding: 0 18px; font-size: 13px; font-weight: 600; color: #0b5cd5">Shop now</button>
+</div>
+<img class="sk-hero-img" src="assets/images/hero-banner.svg" alt="Light bulb, cordless drill and safety helmet" style="display: block; flex-shrink: 0; height: auto">
+</div>
+</section>
+<section style="padding-top: 24px">
+<div style="display: flex; align-items: baseline; justify-content: space-between">
+<h2 style="margin: 0; font-size: 17px; font-weight: 700; color: #0f172a">Categories</h2>
+<button type="button" class="sk-link" onClick="{{goCategories}}" style="font-size: 13px; font-weight: 600; color: #0b5cd5">See all</button>
+</div>
+<ul class="sk-cats" style="margin: 16px 0 0; padding: 0; list-style: none">
+<li><button type="button" class="sk-link" onClick="{{openCat.elec}}" style="width: 64px; display: flex; flex-direction: column; align-items: center; gap: 8px">
+<img src="assets/images/electricals-wires-switches.jpg" alt="" style="width: 56px; height: 56px; border-radius: 999px; object-fit: cover; border: 2px solid #e8f0fd">
+<span style="font-size: 11px; font-weight: 500; color: #0f172a">Electricals</span></button></li>
+<li><button type="button" class="sk-link" onClick="{{openCat.light}}" style="width: 64px; display: flex; flex-direction: column; align-items: center; gap: 8px">
+<img src="assets/images/lighting-bulbs-pendant.jpg" alt="" style="width: 56px; height: 56px; border-radius: 999px; object-fit: cover; border: 2px solid #e8f0fd">
+<span style="font-size: 11px; font-weight: 500; color: #0f172a">Lighting</span></button></li>
+<li><button type="button" class="sk-link" onClick="{{openCat.tools}}" style="width: 64px; display: flex; flex-direction: column; align-items: center; gap: 8px">
+<img src="assets/images/power-tools-drill.jpg" alt="" style="width: 56px; height: 56px; border-radius: 999px; object-fit: cover; border: 2px solid #e8f0fd">
+<span style="font-size: 11px; font-weight: 500; color: #0f172a">Power Tools</span></button></li>
+<li><button type="button" class="sk-link" onClick="{{openCat.safety}}" style="width: 64px; display: flex; flex-direction: column; align-items: center; gap: 8px">
+<img src="assets/images/safety-gear.jpg" alt="" style="width: 56px; height: 56px; border-radius: 999px; object-fit: cover; border: 2px solid #e8f0fd">
+<span style="font-size: 11px; font-weight: 500; color: #0f172a">Safety</span></button></li>
+<li><button type="button" class="sk-link" onClick="{{openCat.plumb}}" style="width: 64px; display: flex; flex-direction: column; align-items: center; gap: 8px">
+<img src="assets/images/plumbing-pipe-tap.jpg" alt="" style="width: 56px; height: 56px; border-radius: 999px; object-fit: cover; border: 2px solid #e8f0fd">
+<span style="font-size: 11px; font-weight: 500; color: #0f172a">Plumbing</span></button></li>
+</ul>
+</section>
+</div>
+</sc-if>
+
+<sc-if value="{{is.categories}}" hint-placeholder-val="{{false}}">
+<div class="sk-wrap" style="padding-top: 20px">
+<div class="sk-catgrid">
+<sc-for list="{{catTiles}}" as="c" hint-placeholder-count="5">
+<button type="button" class="sk-link sk-tile" onClick="{{c.open}}" style="display: flex; flex-direction: column; gap: 12px; padding: 18px; border-radius: 14px; background: #ffffff; border: 1px solid #e5e8ee">
+<img src="{{c.img}}" alt="" loading="lazy" style="display: block; width: 100%; height: 130px; object-fit: cover; border-radius: 10px">
+<span style="font-size: 16px; font-weight: 700; color: #0f172a">{{c.name}}</span>
+<span style="font-size: 12px; line-height: 18px; color: #64748b">{{c.subs}}</span>
+<span style="font-size: 12px; font-weight: 600; color: #0b5cd5">{{c.count}} products →</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{is.category}}" hint-placeholder-val="{{false}}">
+<div class="sk-wrap" style="padding-top: 16px; display: flex; flex-direction: column; gap: 12px">
+<p style="margin: 0; font-size: 13px; color: #64748b">{{listCount}} products from verified sellers</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{subChips}}" as="s" hint-placeholder-count="3">
+<button type="button" class="sk-link" onClick="{{s.pick}}" aria-pressed="{{s.on}}" style="height: 36px; padding: 0 14px; border-radius: 999px; font-size: 13px; font-weight: 600; border: 1px solid {{s.bd}}; background: {{s.bg}}; color: {{s.fg}}">{{s.label}}</button>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<span style="font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em">Sort</span>
+<sc-for list="{{sortChips}}" as="s" hint-placeholder-count="4">
+<button type="button" class="sk-link" onClick="{{s.pick}}" aria-pressed="{{s.on}}" style="height: 32px; padding: 0 12px; border-radius: 8px; font-size: 12px; font-weight: 600; border: 1px solid {{s.bd}}; background: {{s.bg}}; color: {{s.fg}}">{{s.label}}</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{is.search}}" hint-placeholder-val="{{false}}">
+<div class="sk-wrap" style="padding-top: 16px; display: flex; flex-direction: column; gap: 12px">
+<label for="sk-q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search products</label>
+<div style="position: relative">
+<span style="position: absolute; left: 14px; top: 14px; color: #64748b; display: flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg></span>
+<input id="sk-q" class="sk-in" type="search" placeholder="Search for products, brands..." value="{{query}}" onChange="{{onQuery}}" autoFocus="{{true}}" style="height: 46px; padding-left: 42px; border-radius: 10px; font-size: 15px">
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<span style="font-size: 12px; font-weight: 600; color: #64748b">Popular:</span>
+<sc-for list="{{popular}}" as="t" hint-placeholder-count="6">
+<button type="button" class="sk-link sk-ghost" onClick="{{t.pick}}" style="height: 32px; padding: 0 12px; border-radius: 999px; background: #ffffff; border: 1px solid #e5e8ee; font-size: 12px; font-weight: 600; color: #0f172a">{{t.label}}</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{is.product}}" hint-placeholder-val="{{false}}">
+<div class="sk-wrap" style="padding-top: 16px">
+<div class="sk-pd" style="background: #ffffff; border: 1px solid #e5e8ee; border-radius: 16px; padding: 16px">
+<div class="sk-pdimg" style="position: relative; overflow: hidden; border-radius: 12px; background: #f3f5f8">
+<img src="{{pd.img}}" alt="{{pd.name}}" style="display: block; width: 100%; height: 100%; object-fit: cover">
+<sc-if value="{{pd.hasBadge}}" hint-placeholder-val="{{true}}">
+<span style="position: absolute; top: 12px; left: 12px; border-radius: 4px; background: #c2410c; padding: 3px 8px; font-size: 11px; font-weight: 600; color: #ffffff">{{pd.badge}}</span>
+</sc-if>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px; padding: 4px 4px 8px">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0b5cd5">{{pd.brand}} · {{pd.subName}}</p>
+<h2 style="margin: 0; font-size: 26px; line-height: 32px; font-weight: 700; letter-spacing: -0.01em; color: #0f172a">{{pd.name}}</h2>
+<p style="margin: 0; display: flex; align-items: center; gap: 6px; font-size: 13px; color: #64748b">
+<span style="display: inline-flex; align-items: center; gap: 4px; border-radius: 6px; background: #15803d; color: #ffffff; padding: 2px 8px; font-weight: 600">{{pd.rating}}
+<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg></span>
+{{pd.reviews}} ratings
+</p>
+<div style="display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px">
+<span style="font-size: 30px; font-weight: 800; color: #0f172a">{{pd.priceText}}</span>
+<span style="font-size: 15px; color: #64748b; text-decoration: line-through">{{pd.mrpText}}</span>
+<span style="font-size: 14px; font-weight: 700; color: #15803d">{{pd.off}}</span>
+</div>
+<p style="margin: -8px 0 0; font-size: 12px; color: #64748b">Inclusive of all taxes</p>
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="font-size: 13px; font-weight: 600; color: #0f172a">Quantity</span>
+<div style="display: flex; align-items: center; border: 1px solid #d5dae3; border-radius: 10px; overflow: hidden">
+<button type="button" class="sk-link sk-ghost" onClick="{{qtyDec}}" aria-label="Decrease quantity" style="width: 44px; height: 44px; display: grid; place-items: center; font-size: 20px; color: #0b5cd5">−</button>
+<span aria-live="polite" style="width: 40px; text-align: center; font-size: 15px; font-weight: 700">{{qty}}</span>
+<button type="button" class="sk-link sk-ghost" onClick="{{qtyInc}}" aria-label="Increase quantity" style="width: 44px; height: 44px; display: grid; place-items: center; font-size: 20px; color: #0b5cd5">+</button>
+</div>
+</div>
+<div style="display: flex; gap: 12px">
+<button type="button" class="sk-link sk-ghost" onClick="{{pdAdd}}" style="flex-grow: 1; height: 48px; display: grid; place-items: center; border-radius: 10px; border: 1.5px solid #0b5cd5; background: #ffffff; font-size: 15px; font-weight: 700; color: #0b5cd5">Add to cart</button>
+<button type="button" class="sk-link sk-primary" onClick="{{pdBuy}}" style="flex-grow: 1; height: 48px; display: grid; place-items: center; border-radius: 10px; background: #0b5cd5; font-size: 15px; font-weight: 700; color: #ffffff">Buy now</button>
+</div>
+<ul style="margin: 4px 0 0; padding: 14px 16px; list-style: none; display: flex; flex-direction: column; gap: 10px; border-radius: 12px; background: #f8fafc; font-size: 13px; color: #0f172a">
+<li style="display: flex; align-items: center; gap: 10px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0b5cd5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path><path d="M15 18H9"></path><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path><circle cx="17" cy="18" r="2"></circle><circle cx="7" cy="18" r="2"></circle></svg>Express delivery to your jobsite</li>
+<li style="display: flex; align-items: center; gap: 10px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0b5cd5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>Sold by verified sellers</li>
+</ul>
+<table style="width: 100%; border-collapse: collapse; font-size: 13px">
+<tbody>
+<tr style="border-bottom: 1px solid #eef1f5"><th scope="row" style="text-align: left; padding: 8px 0; width: 40%; font-weight: 500; color: #64748b">Brand</th><td style="padding: 8px 0; font-weight: 600">{{pd.brand}}</td></tr>
+<tr style="border-bottom: 1px solid #eef1f5"><th scope="row" style="text-align: left; padding: 8px 0; font-weight: 500; color: #64748b">Category</th><td style="padding: 8px 0; font-weight: 600">{{pd.catName}}</td></tr>
+<tr style="border-bottom: 1px solid #eef1f5"><th scope="row" style="text-align: left; padding: 8px 0; font-weight: 500; color: #64748b">Type</th><td style="padding: 8px 0; font-weight: 600">{{pd.subName}}</td></tr>
+<tr><th scope="row" style="text-align: left; padding: 8px 0; font-weight: 500; color: #64748b">Range</th><td style="padding: 8px 0; font-weight: 600">{{pd.variant}}</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{showGrid}}" hint-placeholder-val="{{true}}">
+<section class="sk-wrap" style="padding-top: 24px">
+<sc-if value="{{grid.hasTitle}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 16px">
+<h2 style="margin: 0; font-size: 17px; font-weight: 700; color: #0f172a">{{grid.title}}</h2>
+<sc-if value="{{grid.showAll}}" hint-placeholder-val="{{true}}">
+<button type="button" class="sk-link" onClick="{{goCategories}}" style="font-size: 13px; font-weight: 600; color: #0b5cd5">View All</button>
+</sc-if>
+</div>
+</sc-if>
+<sc-if value="{{grid.empty}}" hint-placeholder-val="{{false}}">
+<div style="padding: 48px 16px; text-align: center; border-radius: 14px; background: #ffffff; border: 1px dashed #d5dae3">
+<p style="margin: 0; font-size: 16px; font-weight: 700">No products found</p>
+<p style="margin: 6px 0 0; font-size: 13px; color: #64748b">Try a different word, like “wires” or “drill”.</p>
+</div>
+</sc-if>
+<div class="sk-grid">
+<sc-for list="{{grid.items}}" as="p" hint-placeholder-count="6">
+<article class="sk-card" style="display: flex; flex-direction: column; overflow: hidden; border-radius: 10px; border: 1px solid #e5e8ee; background: #ffffff">
+<button type="button" class="sk-link" onClick="{{p.open}}" aria-label="View {{p.name}}" style="position: relative; display: block; width: 100%; background: #f3f5f8">
+<img src="{{p.img}}" alt="" loading="lazy" style="display: block; width: 100%; height: 150px; object-fit: cover">
+<sc-if value="{{p.hasBadge}}" hint-placeholder-val="{{true}}">
+<span style="position: absolute; top: 8px; left: 8px; border-radius: 4px; background: #c2410c; padding: 2px 6px; font-size: 10px; font-weight: 600; color: #ffffff">{{p.badge}}</span>
+</sc-if>
+</button>
+<div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px; padding: 10px">
+<button type="button" class="sk-link" onClick="{{p.open}}" style="min-height: 36px; font-size: 13px; line-height: 18px; font-weight: 500; color: #0f172a">{{p.name}}</button>
+<p style="margin: 0; display: flex; align-items: center; gap: 4px; font-size: 11px; color: #64748b">
+<svg width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+<span style="font-weight: 600; color: #0f172a">{{p.rating}}</span>({{p.reviews}})
+</p>
+<p style="margin: auto 0 0; display: flex; align-items: baseline; gap: 6px">
+<span style="font-size: 16px; font-weight: 700; color: #0f172a">{{p.priceText}}</span>
+<span style="font-size: 11px; color: #64748b; text-decoration: line-through">{{p.mrpText}}</span>
+</p>
+<button type="button" class="sk-link sk-add" onClick="{{p.add}}" style="margin-top: 4px; height: 38px; display: grid; place-items: center; border-radius: 6px; background: #e8f0fd; font-size: 13px; font-weight: 600; color: #0b5cd5">{{p.label}}</button>
+</div>
+</article>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{is.cart}}" hint-placeholder-val="{{false}}">
+<div class="sk-wrap" style="padding-top: 16px">
+<sc-if value="{{cartEmpty}}" hint-placeholder-val="{{false}}">
+<div style="padding: 56px 16px; text-align: center; border-radius: 16px; background: #ffffff; border: 1px solid #e5e8ee">
+<span style="width: 64px; height: 64px; margin: 0 auto; display: grid; place-items: center; border-radius: 999px; background: #e8f0fd; color: #0b5cd5"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span>
+<p style="margin: 16px 0 0; font-size: 18px; font-weight: 700">Your cart is empty</p>
+<p style="margin: 6px 0 20px; font-size: 13px; color: #64748b">Add electricals, tools and essentials to get started.</p>
+<button type="button" class="sk-link sk-primary" onClick="{{goHome}}" style="height: 44px; padding: 0 22px; border-radius: 999px; background: #0b5cd5; color: #ffffff; font-size: 14px; font-weight: 600">Start shopping</button>
+</div>
+</sc-if>
+<sc-if value="{{cartHas}}" hint-placeholder-val="{{true}}">
+<div class="sk-split">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{lines}}" as="l" hint-placeholder-count="3">
+<div style="display: flex; gap: 12px; padding: 12px; border-radius: 12px; background: #ffffff; border: 1px solid #e5e8ee">
+<button type="button" class="sk-link" onClick="{{l.open}}" aria-label="View {{l.name}}" style="width: 84px; height: 84px; flex-shrink: 0; display: grid; place-items: center; border-radius: 8px; background: #f3f5f8; color: #7b8698">
+<img src="{{l.img}}" alt="" style="display: block; width: 84px; height: 84px; object-fit: cover; border-radius: 8px">
+</button>
+<div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+<button type="button" class="sk-link" onClick="{{l.open}}" style="font-size: 14px; font-weight: 600; line-height: 19px; color: #0f172a">{{l.name}}</button>
+<span style="font-size: 12px; color: #64748b">{{l.subName}}</span>
+<span style="display: flex; align-items: baseline; gap: 6px"><span style="font-size: 15px; font-weight: 700">{{l.lineText}}</span><span style="font-size: 11px; color: #64748b; text-decoration: line-through">{{l.lineMrpText}}</span></span>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 4px">
+<div style="display: flex; align-items: center; border: 1px solid #d5dae3; border-radius: 8px; overflow: hidden">
+<button type="button" class="sk-link sk-ghost" onClick="{{l.dec}}" aria-label="Decrease quantity" style="width: 36px; height: 36px; display: grid; place-items: center; font-size: 18px; color: #0b5cd5">−</button>
+<span style="width: 32px; text-align: center; font-size: 14px; font-weight: 700">{{l.qty}}</span>
+<button type="button" class="sk-link sk-ghost" onClick="{{l.inc}}" aria-label="Increase quantity" style="width: 36px; height: 36px; display: grid; place-items: center; font-size: 18px; color: #0b5cd5">+</button>
+</div>
+<button type="button" class="sk-link" onClick="{{l.remove}}" style="height: 36px; padding: 0 8px; font-size: 12px; font-weight: 600; color: #b91c1c">Remove</button>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+<aside style="padding: 18px; border-radius: 14px; background: #ffffff; border: 1px solid #e5e8ee; display: flex; flex-direction: column; gap: 10px; font-size: 14px">
+<h2 style="margin: 0 0 4px; font-size: 16px; font-weight: 700">Order summary</h2>
+<div style="display: flex; justify-content: space-between"><span style="color: #64748b">Price ({{cartCount}} items)</span><span>{{sum.mrp}}</span></div>
+<div style="display: flex; justify-content: space-between"><span style="color: #64748b">Discount</span><span style="color: #15803d; font-weight: 600">− {{sum.save}}</span></div>
+<div style="display: flex; justify-content: space-between"><span style="color: #64748b">Delivery</span><span style="color: #15803d; font-weight: 600">Free</span></div>
+<div style="display: flex; justify-content: space-between; padding-top: 10px; border-top: 1px dashed #d5dae3; font-size: 17px; font-weight: 800"><span>Total</span><span>{{sum.total}}</span></div>
+<p style="margin: 0; font-size: 12px; font-weight: 600; color: #15803d">You save {{sum.save}} on this order</p>
+<button type="button" class="sk-link sk-primary" onClick="{{goCheckout}}" style="margin-top: 6px; height: 48px; display: grid; place-items: center; border-radius: 10px; background: #0b5cd5; color: #ffffff; font-size: 15px; font-weight: 700">Proceed to checkout</button>
+<button type="button" class="sk-link" onClick="{{goHome}}" style="height: 40px; display: grid; place-items: center; font-size: 13px; font-weight: 600; color: #0b5cd5">Continue shopping</button>
+</aside>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{is.checkout}}" hint-placeholder-val="{{false}}">
+<div class="sk-wrap" style="padding-top: 16px">
+<div class="sk-split">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<section style="padding: 18px; border-radius: 14px; background: #ffffff; border: 1px solid #e5e8ee; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 16px; font-weight: 700">Delivery address</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="sk-name" style="font-size: 12px; font-weight: 600; color: #334155">Full name</label><input id="sk-name" class="sk-in" type="text" autoComplete="name" placeholder="Your name"></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="sk-phone" style="font-size: 12px; font-weight: 600; color: #334155">Mobile number</label><input id="sk-phone" class="sk-in" type="tel" autoComplete="tel" placeholder="10-digit number"></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="sk-addr" style="font-size: 12px; font-weight: 600; color: #334155">Address / jobsite</label><input id="sk-addr" class="sk-in" type="text" autoComplete="street-address" placeholder="House no., street, landmark"></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="sk-city" style="font-size: 12px; font-weight: 600; color: #334155">City</label><input id="sk-city" class="sk-in" type="text" autoComplete="address-level2" placeholder="City"></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="sk-pin" style="font-size: 12px; font-weight: 600; color: #334155">Pincode</label><input id="sk-pin" class="sk-in" type="text" inputMode="numeric" autoComplete="postal-code" placeholder="6-digit pincode"></div>
+</div>
+</section>
+<fieldset style="margin: 0; padding: 18px; border-radius: 14px; background: #ffffff; border: 1px solid #e5e8ee; display: flex; flex-direction: column; gap: 10px">
+<legend style="float: left; width: 100%; padding: 0; margin-bottom: 4px; font-size: 16px; font-weight: 700">Payment method</legend>
+<sc-for list="{{payOpts}}" as="o" hint-placeholder-count="3">
+<label style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 14px; border-radius: 10px; cursor: pointer; border: 1.5px solid {{o.bd}}; background: {{o.bg}}">
+<input type="radio" name="sk-pay" checked="{{o.on}}" onChange="{{o.pick}}" style="width: 18px; height: 18px; accent-color: #0b5cd5">
+<span style="display: flex; flex-direction: column"><span style="font-size: 14px; font-weight: 600">{{o.label}}</span><span style="font-size: 12px; color: #64748b">{{o.hint}}</span></span>
+</label>
+</sc-for>
+</fieldset>
+</div>
+<aside style="padding: 18px; border-radius: 14px; background: #ffffff; border: 1px solid #e5e8ee; display: flex; flex-direction: column; gap: 10px; font-size: 14px">
+<h2 style="margin: 0 0 4px; font-size: 16px; font-weight: 700">Order summary</h2>
+<sc-for list="{{lines}}" as="l" hint-placeholder-count="3">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 13px"><span style="color: #334155">{{l.name}} × {{l.qty}}</span><span style="font-weight: 600; white-space: nowrap">{{l.lineText}}</span></div>
+</sc-for>
+<div style="display: flex; justify-content: space-between; padding-top: 10px; border-top: 1px solid #eef1f5"><span style="color: #64748b">Delivery</span><span style="color: #15803d; font-weight: 600">Free</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 17px; font-weight: 800"><span>Total</span><span>{{sum.total}}</span></div>
+<button type="button" class="sk-link sk-primary" onClick="{{placeOrder}}" style="margin-top: 6px; height: 48px; display: grid; place-items: center; border-radius: 10px; background: #0b5cd5; color: #ffffff; font-size: 15px; font-weight: 700">Place order · {{sum.total}}</button>
+</aside>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{is.success}}" hint-placeholder-val="{{false}}">
+<div class="sk-wrap" style="padding-top: 32px">
+<div style="max-width: 520px; margin: 0 auto; padding: 40px 24px; text-align: center; border-radius: 16px; background: #ffffff; border: 1px solid #e5e8ee">
+<span style="width: 72px; height: 72px; margin: 0 auto; display: grid; place-items: center; border-radius: 999px; background: #dcfce7; color: #15803d"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
+<h1 style="margin: 18px 0 0; font-size: 24px; font-weight: 800">Order placed!</h1>
+<p style="margin: 8px 0 0; font-size: 14px; color: #64748b">Order {{last.id}} · {{last.items}} items · {{last.total}}</p>
+<p style="margin: 4px 0 24px; font-size: 14px; color: #64748b">We'll notify you when it's on the way.</p>
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px">
+<button type="button" class="sk-link sk-primary" onClick="{{goOrders}}" style="height: 44px; padding: 0 22px; border-radius: 999px; background: #0b5cd5; color: #ffffff; font-size: 14px; font-weight: 600">View orders</button>
+<button type="button" class="sk-link sk-ghost" onClick="{{goHome}}" style="height: 44px; padding: 0 22px; border-radius: 999px; border: 1.5px solid #0b5cd5; color: #0b5cd5; font-size: 14px; font-weight: 600">Continue shopping</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{is.orders}}" hint-placeholder-val="{{false}}">
+<div class="sk-wrap" style="padding-top: 16px; display: flex; flex-direction: column; gap: 12px">
+<sc-if value="{{ordersEmpty}}" hint-placeholder-val="{{true}}">
+<div style="padding: 56px 16px; text-align: center; border-radius: 16px; background: #ffffff; border: 1px solid #e5e8ee">
+<span style="width: 64px; height: 64px; margin: 0 auto; display: grid; place-items: center; border-radius: 999px; background: #e8f0fd; color: #0b5cd5"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"></path><path d="M12 22V12"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><path d="m7.5 4.27 9 5.15"></path></svg></span>
+<p style="margin: 16px 0 0; font-size: 18px; font-weight: 700">No orders yet</p>
+<p style="margin: 6px 0 20px; font-size: 13px; color: #64748b">Orders you place will show up here.</p>
+<button type="button" class="sk-link sk-primary" onClick="{{goHome}}" style="height: 44px; padding: 0 22px; border-radius: 999px; background: #0b5cd5; color: #ffffff; font-size: 14px; font-weight: 600">Start shopping</button>
+</div>
+</sc-if>
+<sc-for list="{{orders}}" as="o" hint-placeholder-count="0">
+<div style="padding: 16px; border-radius: 14px; background: #ffffff; border: 1px solid #e5e8ee; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<span style="font-size: 15px; font-weight: 700">Order {{o.id}}</span>
+<span style="border-radius: 999px; background: #dcfce7; color: #166534; padding: 3px 10px; font-size: 12px; font-weight: 600">Confirmed</span>
+</div>
+<span style="font-size: 13px; color: #334155">{{o.summary}}</span>
+<div style="display: flex; justify-content: space-between; font-size: 13px; color: #64748b"><span>{{o.date}} · {{o.items}} items · {{o.pay}}</span><span style="font-weight: 700; color: #0f172a">{{o.total}}</span></div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{is.notifications}}" hint-placeholder-val="{{false}}">
+<div class="sk-wrap" style="padding-top: 16px">
+<div style="border-radius: 14px; background: #ffffff; border: 1px solid #e5e8ee; overflow: hidden">
+<sc-for list="{{notes}}" as="n" hint-placeholder-count="2">
+<button type="button" class="sk-link sk-row" onClick="{{n.open}}" style="width: 100%; display: flex; gap: 12px; padding: 16px; border-bottom: 1px solid #eef1f5">
+<span style="width: 40px; height: 40px; flex-shrink: 0; display: grid; place-items: center; border-radius: 999px; background: #e8f0fd; color: #0b5cd5"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg></span>
+<span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 14px; font-weight: 700; color: #0f172a">{{n.title}}</span><span style="font-size: 13px; line-height: 18px; color: #475569">{{n.body}}</span><span style="font-size: 11px; color: #64748b">{{n.time}}</span></span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{is.account}}" hint-placeholder-val="{{false}}">
+<div class="sk-wrap" style="padding-top: 16px; display: flex; flex-direction: column; gap: 16px; max-width: 720px">
+<div style="display: flex; align-items: center; gap: 16px; padding: 20px; border-radius: 14px; background: #ffffff; border: 1px solid #e5e8ee">
+<span style="width: 56px; height: 56px; flex-shrink: 0; display: grid; place-items: center; border-radius: 999px; background: #0b5cd5; color: #ffffff"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
+<div style="flex-grow: 1"><p style="margin: 0; font-size: 17px; font-weight: 700">Guest</p><p style="margin: 2px 0 0; font-size: 13px; color: #64748b">Sign in to track orders and save addresses</p></div>
+<button type="button" class="sk-link sk-primary" onClick="{{signIn}}" style="height: 40px; padding: 0 18px; border-radius: 999px; background: #0b5cd5; color: #ffffff; font-size: 13px; font-weight: 600">Sign in</button>
+</div>
+<div style="border-radius: 14px; background: #ffffff; border: 1px solid #e5e8ee; overflow: hidden">
+<sc-for list="{{accountRows}}" as="r" hint-placeholder-count="5">
+<button type="button" class="sk-link sk-row" onClick="{{r.go}}" style="width: 100%; min-height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; border-bottom: 1px solid #eef1f5; font-size: 14px; font-weight: 600; color: #0f172a">
+<span>{{r.label}}</span>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+</main>
+
+<footer style="background: #0b1b3a; color: #cbd5e1; padding: 40px 0 120px">
+<div class="sk-wrap sk-foot">
+<div>
+<p style="margin: 0; font-size: 20px; font-weight: 700; color: #ffffff">Skycart</p>
+<p style="margin: 8px 0 0; font-size: 13px; line-height: 20px; max-width: 320px">Electricals, lighting, tools and home essentials from verified sellers, with express delivery to your jobsite.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; font-size: 13px">
+<p style="margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #ffffff">Shop</p>
+<button type="button" class="sk-link" onClick="{{openCat.elec}}">Electricals</button>
+<button type="button" class="sk-link" onClick="{{openCat.light}}">Lighting</button>
+<button type="button" class="sk-link" onClick="{{openCat.tools}}">Power Tools</button>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; font-size: 13px">
+<p style="margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #ffffff">More</p>
+<button type="button" class="sk-link" onClick="{{openCat.safety}}">Safety</button>
+<button type="button" class="sk-link" onClick="{{openCat.plumb}}">Plumbing</button>
+<button type="button" class="sk-link" onClick="{{openCat.build}}">Construction Materials</button>
+<button type="button" class="sk-link" onClick="{{openCat.weld}}">Welding</button>
+<button type="button" class="sk-link" onClick="{{goCategories}}">All categories</button>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; font-size: 13px">
+<p style="margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #ffffff">Account</p>
+<button type="button" class="sk-link" onClick="{{goOrders}}">My orders</button>
+<button type="button" class="sk-link" onClick="{{goCart}}">Cart</button>
+<button type="button" class="sk-link" onClick="{{goAccount}}">Profile</button>
+</div>
+</div>
+<div class="sk-wrap" style="margin-top: 32px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.12); font-size: 12px; color: #94a3b8">© 2026 Skycart</div>
+</footer>
+
+<nav class="sk-tabbar sk-mob" aria-label="Main" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid #e5e8ee; background: #ffffff; padding: 8px 0 12px">
+<button type="button" class="sk-link" onClick="{{goHome}}" style="display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: {{nav.home}}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+Home</button>
+<button type="button" class="sk-link" onClick="{{goCategories}}" style="display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: {{nav.cats}}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="14" rx="1"></rect><rect width="7" height="7" x="3" y="14" rx="1"></rect></svg>
+Categories</button>
+<button type="button" class="sk-link" onClick="{{goCart}}" style="display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: {{nav.cart}}">
+<span style="position: relative; display: flex">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
+<span style="position: absolute; top: -8px; right: -10px; min-width: 16px; display: grid; place-items: center; border-radius: 999px; background: #c2410c; padding: 0 4px; font-size: 10px; line-height: 16px; color: #ffffff">{{cartCount}}</span>
+</span>
+Cart</button>
+<button type="button" class="sk-link" onClick="{{goOrders}}" style="display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: {{nav.orders}}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"></path><path d="M12 22V12"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><path d="m7.5 4.27 9 5.15"></path></svg>
+Orders</button>
+<button type="button" class="sk-link" onClick="{{goAccount}}" style="display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: {{nav.account}}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+Account</button>
+</nav>
+
+<sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}">
+<div class="sk-toast" role="status" style="display: flex; align-items: center; gap: 14px; padding: 10px 10px 10px 16px; border-radius: 12px; background: #0f172a; color: #ffffff; font-size: 13px; font-weight: 500; box-shadow: 0 10px 30px rgba(15,23,42,0.25); white-space: nowrap; max-width: calc(100vw - 32px)">
+<span style="min-width: 0; overflow: hidden; text-overflow: ellipsis">{{toast}}</span>
+<sc-if value="{{toastCart}}" hint-placeholder-val="{{true}}">
+<button type="button" class="sk-link" onClick="{{goCart}}" style="height: 32px; padding: 0 12px; border-radius: 8px; background: #ffffff; color: #0b5cd5; font-size: 12px; font-weight: 700">View cart</button>
+</sc-if>
+</div>
+</sc-if>
+
+</div>
+</template>
+<noscript>Please enable JavaScript to use Skycart.</noscript>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
